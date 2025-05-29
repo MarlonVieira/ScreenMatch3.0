@@ -1,16 +1,10 @@
 package br.com.alura.screenmatch.main;
 
-import br.com.alura.screenmatch.model.Episode;
-import br.com.alura.screenmatch.model.EpisodesData;
 import br.com.alura.screenmatch.model.SeasonData;
 import br.com.alura.screenmatch.model.SeriesData;
 import br.com.alura.screenmatch.service.ConsumptionAPI;
 import br.com.alura.screenmatch.service.ConvertData;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MainScreenMatch {
     private Scanner scan = new Scanner(System.in);
@@ -20,21 +14,23 @@ public class MainScreenMatch {
     private final String URL = "https://www.omdbapi.com/?t=";
     private final String SEASON = "&season=";
     private final String API_KEY = "&apikey=6585022c";
-//    private List<SeriesData> listSeries = new List<SeriesData>;
+    private List<SeriesData> listSeries = new ArrayList<>();
 
     public void showMenu() {
         var option = -1;
 
         while (option != 0) {
             var menu = """
-                    1 - Search serie: 
-                    2- Search episodes: 
+                    1 - Search serie
+                    2 - Search episodes
+                    3 - List searched series
                     
-                    0 - Leave
-                    """;
+                    0 - Leave""";
 
             System.out.println(menu);
             option = scan.nextInt();
+
+            scan.nextLine();
 
             switch (option) {
                 case 1:
@@ -42,6 +38,9 @@ public class MainScreenMatch {
                     break;
                 case 2:
                     searchEpisodesSerie();
+                case 3:
+                    listSearchedSeries();
+                    break;
                 case 0:
                     System.out.println("Leaving...");
                     break;
@@ -53,6 +52,7 @@ public class MainScreenMatch {
 
     private void searchWebSerie() {
         SeriesData data = getSeriesData();
+        listSeries.add(data);
         System.out.println(data);
     }
 
@@ -76,4 +76,7 @@ public class MainScreenMatch {
         season.forEach(System.out::println);
     }
 
+    private void listSearchedSeries() {
+        listSeries.forEach(System.out::println);
+    }
 }
