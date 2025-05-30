@@ -1,10 +1,12 @@
 package br.com.alura.screenmatch.main;
 
 import br.com.alura.screenmatch.model.SeasonData;
+import br.com.alura.screenmatch.model.Serie;
 import br.com.alura.screenmatch.model.SeriesData;
 import br.com.alura.screenmatch.service.ConsumptionAPI;
 import br.com.alura.screenmatch.service.ConvertData;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainScreenMatch {
     private Scanner scan = new Scanner(System.in);
@@ -77,6 +79,13 @@ public class MainScreenMatch {
     }
 
     private void listSearchedSeries() {
-        listSeries.forEach(System.out::println);
+        List<Serie> series = new ArrayList<>();
+        series = listSeries.stream()
+                    .map(d -> new Serie(d))
+                    .collect(Collectors.toList());
+
+        series.stream()
+                .sorted(Comparator.comparing(Serie::getGenre))
+                .forEach(System.out::println);
     }
 }

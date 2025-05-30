@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7126c56-e7b2-48d0-9c26-4ded91ce623c" name="Changes" comment="01. A new project using the Spring Framework.&#10;05/12/2025">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/model/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/model/Serie.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/service/ConsultChatGPT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/main/MainScreenMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/main/MainScreenMatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/model/SeriesData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/model/SeriesData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/model/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/model/Serie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/main/MainScreenMatch.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/main/MainScreenMatch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/model/SeriesData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/model/SeriesData.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +22,8 @@
       <list>
         <option value="Interface" />
         <option value="Record" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
