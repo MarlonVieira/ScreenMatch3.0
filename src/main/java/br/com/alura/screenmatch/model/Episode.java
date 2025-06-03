@@ -1,8 +1,13 @@
 package br.com.alura.screenmatch.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+//@Entity
+//@Table(name = "episodes")
 public class Episode {
     private Integer season;
     private String title;

@@ -3,8 +3,11 @@ package br.com.alura.screenmatch.main;
 import br.com.alura.screenmatch.model.SeasonData;
 import br.com.alura.screenmatch.model.Serie;
 import br.com.alura.screenmatch.model.SeriesData;
+import br.com.alura.screenmatch.repository.SerieRepository;
 import br.com.alura.screenmatch.service.ConsumptionAPI;
 import br.com.alura.screenmatch.service.ConvertData;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,6 +20,11 @@ public class MainScreenMatch {
     private final String SEASON = "&season=";
     private final String API_KEY = "&apikey=6585022c";
     private List<SeriesData> listSeries = new ArrayList<>();
+    private SerieRepository serieRepository;
+
+    public MainScreenMatch(SerieRepository serieRepository) {
+        this.serieRepository = serieRepository;
+    }
 
     public void showMenu() {
         var option = -1;
@@ -54,7 +62,8 @@ public class MainScreenMatch {
 
     private void searchWebSerie() {
         SeriesData data = getSeriesData();
-        listSeries.add(data);
+        Serie serie = new Serie(data);
+        serieRepository.save(serie);
         System.out.println(data);
     }
 
@@ -79,11 +88,7 @@ public class MainScreenMatch {
     }
 
     private void listSearchedSeries() {
-        List<Serie> series = new ArrayList<>();
-        series = listSeries.stream()
-                    .map(d -> new Serie(d))
-                    .collect(Collectors.toList());
-
+        List<Serie> series = serieRepository.findAll();
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenre))
                 .forEach(System.out::println);
