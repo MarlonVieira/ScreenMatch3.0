@@ -5,19 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7126c56-e7b2-48d0-9c26-4ded91ce623c" name="Changes" comment="01. A new project using the Spring Framework.&#10;05/12/2025">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/repository/SerieRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/ScreenmatchApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/ScreenmatchApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/main/MainScreenMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/main/MainScreenMatch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/model/Episode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/model/Episode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/model/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/model/Serie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/service/ConsultChatGPT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/service/ConsultChatGPT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/repository/SerieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/alura/screenmatch/repository/SerieRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/ScreenmatchApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/ScreenmatchApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/main/MainScreenMatch.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/main/MainScreenMatch.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/model/Episode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/model/Episode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/model/Serie.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/alura/screenmatch/model/Serie.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,10 +24,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Record" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -43,12 +40,12 @@
     &quot;assignee&quot;: &quot;MarlonVieira&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/MarlonVieira/ScreenMatch3.0",
-    "accountId": "72237d7f-d5e0-42ea-bad8-fc51dccd7f6e"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MarlonVieira/ScreenMatch3.0&quot;,
+    &quot;accountId&quot;: &quot;72237d7f-d5e0-42ea-bad8-fc51dccd7f6e&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>

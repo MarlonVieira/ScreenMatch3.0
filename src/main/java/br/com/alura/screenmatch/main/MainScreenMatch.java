@@ -1,12 +1,12 @@
 package br.com.alura.screenmatch.main;
 
+import br.com.alura.screenmatch.model.Episode;
 import br.com.alura.screenmatch.model.SeasonData;
 import br.com.alura.screenmatch.model.Serie;
 import br.com.alura.screenmatch.model.SeriesData;
 import br.com.alura.screenmatch.repository.SerieRepository;
 import br.com.alura.screenmatch.service.ConsumptionAPI;
 import br.com.alura.screenmatch.service.ConvertData;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,6 +21,7 @@ public class MainScreenMatch {
     private final String API_KEY = "&apikey=6585022c";
     private List<SeriesData> listSeries = new ArrayList<>();
     private SerieRepository serieRepository;
+    private List<Serie> series = new ArrayList<>();
 
     public MainScreenMatch(SerieRepository serieRepository) {
         this.serieRepository = serieRepository;
@@ -76,19 +77,39 @@ public class MainScreenMatch {
     }
 
     private void searchEpisodesSerie() {
-        SeriesData seriesData = getSeriesData();
-        List<SeasonData> season = new ArrayList<>();
+        listSearchedSeries();
+        System.out.print("Enter the name of the serie: ");
+        var nameSerie = scan.nextLine();
 
-        for (int i = 1; i <= seriesData.totalSeasons(); i++) {
-            var json = consumptionAPI.getData(URL + seriesData.title().replace(" ", "+") + "&season=" + i + API_KEY);
-            SeasonData dadosTemporada = convertData.getData(json, SeasonData.class);
-            season.add(dadosTemporada);
+        Optional<Serie> serie = series.stream()
+                                        .filter(s -> s.getTitle().toLowerCase().contains(nameSerie.toLowerCase()))
+                                        .findFirst();
+
+        if (serie.isPresent()) {
+            var serieFound = serie.get();
+            List<SeasonData> season = new ArrayList<>();
+
+            for (int i = 1; i <= serieFound.getTotalSeasons(); i++) {
+                var json = consumptionAPI.getData(URL + serieFound.getTitle().replace(" ", "+") + "&season=" + i + API_KEY);
+                SeasonData dadosTemporada = convertData.getData(json, SeasonData.class);
+                season.add(dadosTemporada);
+            }
+            season.forEach(System.out::println);
+
+            List<Episode> episodeList =  season.stream()
+                                                    .flatMap(d -> d.episodes().stream()
+                                                            .map(e -> new Episode(d.season(), e)))
+                                                    .collect(Collectors.toList());
+
+            serieFound.setEpisodeList(episodeList);
+            serieRepository.save(serieFound);
+        } else {
+            System.out.println("Serie not found!");
         }
-        season.forEach(System.out::println);
     }
 
     private void listSearchedSeries() {
-        List<Serie> series = serieRepository.findAll();
+        series = serieRepository.findAll();
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenre))
                 .forEach(System.out::println);
