@@ -35,6 +35,8 @@ public class MainScreenMatch {
                     1 - Search serie
                     2 - Search episodes
                     3 - List searched series
+                    4 - Search serie by title
+                    5 - Search series by actor
                     
                     0 - Leave""";
 
@@ -51,6 +53,11 @@ public class MainScreenMatch {
                     searchEpisodesSerie();
                 case 3:
                     listSearchedSeries();
+                    break;
+                case 4:
+                    searchSerieByTitle();
+                case 5:
+                    searchSeriesByActor();
                     break;
                 case 0:
                     System.out.println("Leaving...");
@@ -81,9 +88,7 @@ public class MainScreenMatch {
         System.out.print("Enter the name of the serie: ");
         var nameSerie = scan.nextLine();
 
-        Optional<Serie> serie = series.stream()
-                                        .filter(s -> s.getTitle().toLowerCase().contains(nameSerie.toLowerCase()))
-                                        .findFirst();
+        Optional<Serie> serie = serieRepository.findByTitleContainingIgnoreCase(nameSerie);
 
         if (serie.isPresent()) {
             var serieFound = serie.get();
@@ -113,5 +118,28 @@ public class MainScreenMatch {
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenre))
                 .forEach(System.out::println);
+    }
+
+    private void searchSerieByTitle() {
+        System.out.print("Enter the name of the serie: ");
+        String serieName = scan.nextLine();
+        Optional<Serie> searchSerie = serieRepository.findByTitleContainingIgnoreCase(serieName);
+
+        if (searchSerie.isPresent()) {
+            System.out.println("Serie data: " + searchSerie.get());
+        } else {
+            System.out.println("Serie not found!");
+        }
+    }
+
+    private void searchSeriesByActor() {
+        System.out.print("Enter the name of the actor: ");
+        String actorName = scan.nextLine();
+        System.out.print("Enter the rating: ");
+        Double rating = scan.nextDouble();
+        List<Serie> searchSerie = serieRepository.findByActorsContainingIgnoreCaseAndRatingGreaterThanEqual(actorName, rating);
+        System.out.println("Actor " + actorName + " series: ");
+        searchSerie.forEach(s -> System.out.println(s.getTitle() + " rating: " + s.getRating()));
+
     }
 }
