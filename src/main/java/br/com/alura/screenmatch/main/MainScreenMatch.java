@@ -37,6 +37,7 @@ public class MainScreenMatch {
                     3 - List searched series
                     4 - Search serie by title
                     5 - Search series by actor
+                    6 - Search top 5 series
                     
                     0 - Leave""";
 
@@ -58,6 +59,9 @@ public class MainScreenMatch {
                     searchSerieByTitle();
                 case 5:
                     searchSeriesByActor();
+                    break;
+                case 6:
+                    topFiveSeries();
                     break;
                 case 0:
                     System.out.println("Leaving...");
@@ -140,6 +144,10 @@ public class MainScreenMatch {
         List<Serie> searchSerie = serieRepository.findByActorsContainingIgnoreCaseAndRatingGreaterThanEqual(actorName, rating);
         System.out.println("Actor " + actorName + " series: ");
         searchSerie.forEach(s -> System.out.println(s.getTitle() + " rating: " + s.getRating()));
+    }
 
+    private void topFiveSeries() {
+        List<Serie> seriesTop = serieRepository.findTop5ByOrderByRatingDesc();
+        seriesTop.forEach(s -> System.out.println(s.getTitle() + " rating: " + s.getRating()));
     }
 }
