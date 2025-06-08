@@ -1,9 +1,6 @@
 package br.com.alura.screenmatch.main;
 
-import br.com.alura.screenmatch.model.Episode;
-import br.com.alura.screenmatch.model.SeasonData;
-import br.com.alura.screenmatch.model.Serie;
-import br.com.alura.screenmatch.model.SeriesData;
+import br.com.alura.screenmatch.model.*;
 import br.com.alura.screenmatch.repository.SerieRepository;
 import br.com.alura.screenmatch.service.ConsumptionAPI;
 import br.com.alura.screenmatch.service.ConvertData;
@@ -22,6 +19,7 @@ public class MainScreenMatch {
     private List<SeriesData> listSeries = new ArrayList<>();
     private SerieRepository serieRepository;
     private List<Serie> series = new ArrayList<>();
+    private Optional<Serie> searchSerie;
 
     public MainScreenMatch(SerieRepository serieRepository) {
         this.serieRepository = serieRepository;
@@ -38,6 +36,10 @@ public class MainScreenMatch {
                     4 - Search serie by title
                     5 - Search series by actor
                     6 - Search top 5 series
+                    7 - Search series by category
+                    8 - Challenge max seasons
+                    9 - Search by Episode excerpt
+                    10 - Search Top 5 episodes by serie
                     
                     0 - Leave""";
 
@@ -62,6 +64,18 @@ public class MainScreenMatch {
                     break;
                 case 6:
                     topFiveSeries();
+                    break;
+                case 7:
+                    searchByCategory();
+                    break;
+                case 8:
+                    searchMaxSeasons();
+                    break;
+                case 9:
+                    searchEpisodeByExcerpt();
+                    break;
+                case 10:
+                    searchTopEpisodesBySerie();
                     break;
                 case 0:
                     System.out.println("Leaving...");
@@ -127,7 +141,7 @@ public class MainScreenMatch {
     private void searchSerieByTitle() {
         System.out.print("Enter the name of the serie: ");
         String serieName = scan.nextLine();
-        Optional<Serie> searchSerie = serieRepository.findByTitleContainingIgnoreCase(serieName);
+        searchSerie = serieRepository.findByTitleContainingIgnoreCase(serieName);
 
         if (searchSerie.isPresent()) {
             System.out.println("Serie data: " + searchSerie.get());
@@ -149,5 +163,48 @@ public class MainScreenMatch {
     private void topFiveSeries() {
         List<Serie> seriesTop = serieRepository.findTop5ByOrderByRatingDesc();
         seriesTop.forEach(s -> System.out.println(s.getTitle() + " rating: " + s.getRating()));
+    }
+
+    private void searchByCategory() {
+        System.out.print("Enter the genre of the series: ");
+        var genre = scan.nextLine();
+        Category category = Category.fromString(genre);
+        List<Serie> seriesByCategory = serieRepository.findByGenre(category);
+        System.out.println("Series from category: " + genre);
+        seriesByCategory.forEach(System.out::println);
+    }
+
+    private void searchMaxSeasons() {
+        System.out.print("Enter number of seasons: ");
+        Integer maxSeasons = scan.nextInt();
+        System.out.print("Enter the rating: ");
+        Double rating = scan.nextDouble();
+//        List<Serie> searchSerie = serieRepository.findBytotalSeasonsLessThanEqualAndRatingGreaterThanEqual(maxSeasons, rating);
+        List<Serie> searchSerie = serieRepository.seriesBySeasonsAndRating(maxSeasons, rating);
+        System.out.println("Max of seasons " + maxSeasons + " series: ");
+        searchSerie.forEach(s -> System.out.println(s.getTitle() + " rating: " + s.getRating()));
+    }
+
+    public void searchEpisodeByExcerpt() {
+        System.out.print("Enter the Episode name: ");
+        String episodeName = scan.nextLine();
+        List<Episode> searchEpisodes = serieRepository.episodesByExcerpt(episodeName);
+        System.out.println("Episodes Excerpt: ");
+        searchEpisodes.forEach(e ->
+                System.out.printf("Serie: %s Season %s - Episode %s - %s\n",
+                        e.getSerie().getTitle(), e.getSeason(),
+                        e.getEpisode(), e.getTitle()));
+    }
+
+    public void searchTopEpisodesBySerie() {
+        searchSerieByTitle();
+        if (searchSerie.isPresent()) {
+            Serie serie = searchSerie.get();
+            List<Episode> topEpisodes = serieRepository.topEpisodesBySerie(serie);
+            topEpisodes.forEach(e ->
+                    System.out.printf("Serie: %s Season %s - Episode %s - %s - Rating %s\n",
+                            e.getSerie().getTitle(), e.getSeason(),
+                            e.getEpisode(), e.getTitle(), e.getRating()));
+        }
     }
 }
