@@ -40,6 +40,7 @@ public class MainScreenMatch {
                     8 - Challenge max seasons
                     9 - Search by Episode excerpt
                     10 - Search Top 5 episodes by serie
+                    11 - Search episodes by date
                     
                     0 - Leave""";
 
@@ -76,6 +77,9 @@ public class MainScreenMatch {
                     break;
                 case 10:
                     searchTopEpisodesBySerie();
+                    break;
+                case 11:
+                    searchEpisodesByDate();
                     break;
                 case 0:
                     System.out.println("Leaving...");
@@ -205,6 +209,20 @@ public class MainScreenMatch {
                     System.out.printf("Serie: %s Season %s - Episode %s - %s - Rating %s\n",
                             e.getSerie().getTitle(), e.getSeason(),
                             e.getEpisode(), e.getTitle(), e.getRating()));
+        }
+    }
+
+    public void searchEpisodesByDate() {
+        searchSerieByTitle();
+        if (searchSerie.isPresent()) {
+            System.out.print("Enter the release deadline year: ");
+            var releaseYear = scan.nextLine();
+            Serie serie = searchSerie.get();
+            List<Episode> episodesYear = serieRepository.episodesOfSerieByYear(serie, releaseYear);
+            episodesYear.forEach(e ->
+                    System.out.printf("Serie: %s Season %s - Episode %s - %s - Rating - Release Year %s\n",
+                            e.getSerie().getTitle(), e.getSeason(),
+                            e.getEpisode(), e.getTitle(), e.getRating(), e.getReleaseDate()));
         }
     }
 }
