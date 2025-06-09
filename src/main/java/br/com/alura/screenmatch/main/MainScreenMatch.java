@@ -55,6 +55,7 @@ public class MainScreenMatch {
                     break;
                 case 2:
                     searchEpisodesSerie();
+                    break;
                 case 3:
                     listSearchedSeries();
                     break;
